@@ -31,7 +31,6 @@
     </nav>
 
     <div class="settings-container container">
-        <h1>Settings</h1>
         <ul class="nav nav-tabs" id="settingsTab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>

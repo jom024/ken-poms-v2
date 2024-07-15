@@ -31,10 +31,10 @@
     </nav>
 
     <div class="container-fluid px-4">
-        <div class="row g-3 my-2">
+        <div class="row g-3">
             <h3 class="text-center">Monthly Overview</h3>
             <div class="col-md-3">
-                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                <div class="summary p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                     <div>
                         <h3 class="fs-2">???</h3>
                         <p class="fs-5">Completed Orders</p>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="col-md-3">
-                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                <div class="summary p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                     <div>
                         <h3 class="fs-2">????</h3>
                         <p class="fs-5">Pending Orders</p>
@@ -54,7 +54,7 @@
             </div>
 
             <div class="col-md-3">
-                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                <div class="summary p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                     <div>
                         <h3 class="fs-2">????</h3>
                         <p class="fs-5">Total Sales</p>
@@ -64,7 +64,7 @@
             </div>
 
             <div class="col-md-3">
-                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                <div class="summary p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                     <div>
                         <h3 class="fs-2">???</h3>
                         <p class="fs-5">Total Clients</p>

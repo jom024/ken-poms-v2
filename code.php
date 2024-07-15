@@ -16,7 +16,7 @@ if (isset($_POST['save'])) {
 
     if ($insert_query_run) {
         $_SESSION['status'] = "Data inserted successfully";
-        header("Location: index.php?p=orders");
+        header("Location: index.php?page=orders");
     } else {
         $_SESSION['status'] = "Insertion of data failed";
         header("Location: error.php");
