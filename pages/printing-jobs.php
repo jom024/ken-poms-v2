@@ -47,7 +47,7 @@
                 ?>
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="text-left float-start p-3">PRINT ORDER MANAGEMENT</h4>
+                        <h4 class="text-left float-start p-3">PRINTING JOBS</h4>
                         <!-- Button trigger modal -->
                         <div class="btn-group m-3 float-end">
                             <button type="button" class="btn btn-primary ordercss" data-bs-toggle="modal" data-bs-target="#addOrder">
@@ -63,10 +63,10 @@
                         <table class="table table-warning table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">Order ID</th>
-                                    <th scope="col">Client ID</th>
-                                    <th scope="col">Order Status</th>
-                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Job Order No.</th>
+                                    <th scope="col">Quotation ID</th>
+                                    <th scope="col">Link</th>
+                                    <th scope="col">Product Name</th>
                                     <th scope="col">Total Price</th>
                                     <th scope="col">Order Date</th>
                                     <th scope="col">Fulfillment Date</th>
@@ -77,7 +77,7 @@
                                 <?php
                                 $connection = mysqli_connect("localhost", "root", "", "ken_poms");
 
-                                $fetch_query = "SELECT * FROM orders";
+                                $fetch_query = "SELECT * FROM job_order";
                                 $fetch_query_run = mysqli_query($connection, $fetch_query);
 
                                 if (mysqli_num_rows($fetch_query_run) > 0) {
