@@ -104,6 +104,7 @@ if (isset($_POST['click-edit-btn'])) {
 if (isset($_POST['update']))
 {
     $id = $_POST['order_id'];
+    
     $client_id = $_POST['client_id'];
     $modeofreceiving_id = $_POST['modeofreceiving_id'];
     $order_status = $_POST['order_status'];

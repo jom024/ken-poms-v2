@@ -5,49 +5,49 @@
     toggleButton.onclick = function() {
         el.classList.toggle("toggled");
     };
-    // view-order
+    // view-pj
     $(document).ready(function() {
 
-        $('.view-client').click(function(e) {
+        $('.view-pj').click(function(e) {
             e.preventDefault();
 
             // console.log('hello');
 
-            var client_id = $(this).closest('tr').find('.client-id').text();
+            var job_order_num = $(this).closest('tr').find('.job-order-num').text();
 
             $.ajax({
                 type: "POST",
-                url: "code_client.php",
+                url: "code_pj.php",
                 data: {
-                    'click-view-client-btn': true,
-                    'client-id': client_id,
+                    'click-view-pj-btn': true,
+                    'job-order-num': job_order_num,
                 },
                 success: function(response) {
                     // console.log(response);
 
-                    $('.view-client-data').html(response);
-                    $('#viewClientModal').modal('show');
+                    $('.view-pj-data').html(response);
+                    $('#viewPJModal').modal('show');
                 }
             });
         });
     });
 
-    // edit-client
+    // edit-pj
     $(document).ready(function() {
 
-        $('.edit-client').click(function(e) {
+        $('.edit-pj').click(function(e) {
             e.preventDefault();
 
 
-            var client_id = $(this).closest('tr').find('.client-id').text();
+            var job_order_num = $(this).closest('tr').find('.job-order-num').text();
             // console.log(client_id);
 
             $.ajax({
                 type: "POST",
-                url: "code_client.php",
+                url: "code_pj.php",
                 data: {
-                    'click-edit-client-btn': true,
-                    'client-id': client_id,
+                    'click-edit-pj-btn': true,
+                    'job-order-num': job_order_num,
                 },
                 success: function(response) {
                     // console.log(response);
@@ -56,16 +56,13 @@
                         // console.log(value['client_id']);
 
 
-                        $('#client_id').val(value['client_id']);
-                        $('#company-name').val(value['company_name']);
-                        $('#contact-name').val(value['contact_name']);
-                        $('#contact-title').val(value['contact_title']);
-                        $('#city-edit').val(value['city']);
-                        $('#postal-code').val(value['postal_code']);
-                        $('#province-edit').val(value['province']);
-                        $('#contact-number').val(value['contact_number']);
+                        $('#job_order_num').val(value['job_order_num']);
+                        $('#quotation-id').val(value['quotation_id']);
+                        $('#product-name').val(value['product_name']);
+                        $('#description-edit').val(value['description']);
+                        $('#job-price').val(value['job_price']);
                     });
-                    // $('#editOrder').modal('show');
+                    $('#editPJ').modal('show');
                 }
             });
         });
@@ -76,15 +73,15 @@
         $('.delete_btn').click(function(e) {
             e.preventDefault();
 
-            var client_id = $(this).closest('tr').find('.client-id').text();
+            var job_order_num = $(this).closest('tr').find('.job-order-num').text();
             // console.log(order_id);
 
             $.ajax({
                 method: "POST",
-                url: "code_client.php",
+                url: "code_pj.php",
                 data: {
                     'click_delete_btn': true,
-                    'client-id': client_id,
+                    'job-order-num': job_order_num,
                 },
                 success: function(response) {
                     console.log(response);

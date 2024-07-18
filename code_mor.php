@@ -13,19 +13,13 @@ if (isset($_POST['save'])) {
 
     $insert_query_run = mysqli_query($connection, $insert_query);
 
-    if ($insert_query_run) {
-        $_SESSION['status'] = "Data inserted successfully";
-        header("Location: index.php?page=delivery");
-    } else {
-        $_SESSION['status'] = "Insertion of data failed";
-        header("Location: error.php");
-    }
+    header("Location: index.php?page=delivery");
 }
 
 
 // View
 if (isset($_POST['click-view-mor-btn'])) {
-    $id = $_POST['modeofreceiving_id'];
+    $id = $_POST['modeofreceiving-id'];
 
     $fetch_query = "SELECT * FROM `mode_of_receiving` WHERE modeofreceiving_id='$id'";
     $fetch_query_run = mysqli_query($connection, $fetch_query);
@@ -35,29 +29,29 @@ if (isset($_POST['click-view-mor-btn'])) {
             echo '
 <div class="card">
     <div class="card-body text-start">
-        <h5 class="card-title text-center mb-4">Order Details</h5>
+        <h5 class="card-title text-center mb-4">MOR Details</h5>
         <div class="row mb-2">
             <div class="col-md-6">
                 <h6 style="font-size: 14px; font-weight:bold;">MOR ID: <span class="fw-normal">'.$row['modeofreceiving_id'].'</span></h6>
             </div>
             <div class="col-md-6">
-                <h6 style="font-size: 14px; font-weight:bold;">Client ID: <span class="fw-normal">'.$row['type'].'</span></h6>
+                <h6 style="font-size: 14px; font-weight:bold;">Type: <span class="fw-normal">'.$row['type'].'</span></h6>
             </div>
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
-                <h6 style="font-size: 14px; font-weight:bold;">Order Status: <span class="fw-normal">'.$row['delivery_date'].'</span></h6>
+                <h6 style="font-size: 14px; font-weight:bold;">Delivery Date: <span class="fw-normal">'.$row['delivery_date'].'</span></h6>
             </div>
             <div class="col-md-6">
-                <h6 style="font-size: 14px; font-weight:bold;">Payment Status: <span class="fw-normal">'.$row['pickup_date'].'</span></h6>
+                <h6 style="font-size: 14px; font-weight:bold;">Pickup Date: <span class="fw-normal">'.$row['pickup_date'].'</span></h6>
             </div>
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
-                <h6 style="font-size: 14px; font-weight:bold;">Total Price: <span class="fw-normal">'.$row['receiver_name'].'</span></h6>
+                <h6 style="font-size: 14px; font-weight:bold;">Receiver Name: <span class="fw-normal">'.$row['receiver_name'].'</span></h6>
             </div>
             <div class="col-md-6">
-                <h6 style="font-size: 14px; font-weight:bold;">Date of Order: <span class="fw-normal">'.$row['delivery_address'].'</span></h6>
+                <h6 style="font-size: 14px; font-weight:bold;">Delivery Address: <span class="fw-normal">'.$row['delivery_address'].'</span></h6>
             </div>
         </div>
     </div>
@@ -71,11 +65,11 @@ if (isset($_POST['click-view-mor-btn'])) {
 }
 
 // Edit
-if (isset($_POST['click-edit-btn'])) {
-    $id = $_POST['order-id'];
+if (isset($_POST['click-edit-mor-btn'])) {
+    $id = $_POST['modeofreceiving-id'];
     $array_result = [];
 
-    $fetch_query = "SELECT * FROM `order` WHERE order_id='$id'";
+    $fetch_query = "SELECT * FROM `mode_of_receiving` WHERE modeofreceiving_id='$id'";
     $fetch_query_run = mysqli_query($connection, $fetch_query);
 
     if (mysqli_num_rows($fetch_query_run) > 0) {
@@ -93,32 +87,32 @@ if (isset($_POST['click-edit-btn'])) {
 // Update
 if (isset($_POST['update']))
 {
-    $id = $_POST['order_id'];
-    $client_id = $_POST['client_id'];
-    $order_status = $_POST['order_status'];
-    $payment_status = $_POST['payment_status'];
-    $total_price = $_POST['total_price'];
-    $order_date = $_POST['order_date'];
-    $fulfillment_date = $_POST['fulfillment_date'];
-    $update_query = "UPDATE `order` SET client_id = '$client_id', order_status = '$order_status', payment_status ='$payment_status' , total_price='$total_price' , order_date='$order_date' , fulfillment_date='$fulfillment_date' WHERE order_id = '$id'";
+    $id = $_POST['modeofreceiving_id'];
+    $type = $_POST['type_edit'];
+    $delivery_date = $_POST['delivery_date_edit'];
+    $pickup_date = $_POST['pickup_date_edit'];
+    $receiver_name = $_POST['receiver_name_edit'];
+    $delivery_address = $_POST['delivery_address_edit'];
+
+    $update_query = "UPDATE `mode_of_receiving` 
+                    SET `type` = '$type', 
+                    delivery_date = '$delivery_date', 
+                    pickup_date ='$pickup_date' , 
+                    receiver_name='$receiver_name' , 
+                    delivery_address='$delivery_address' 
+                    WHERE modeofreceiving_id = '$id'";
 
     $update_query_run = mysqli_query($connection, $update_query);
 
-    if($update_query_run){
-        $_SESSION['status'] = "Data updated successfully";
-        header("Location: index.php?page=orders");
-    } else {
-        $_SESSION['status'] = "Update failed";
-        header("Location: index.php?page=orders");
-    }
+    Header("Location: index.php?page=delivery");
 }
 
 // delete
 if(isset($_POST['click_delete_btn']))
 {
-    $id = $_POST['order-id'];
+    $id = $_POST['modeofreceiving-id'];
 
-    $delete_query = "DELETE FROM `order` WHERE order_id = '$id'";
+    $delete_query = "DELETE FROM `mode_of_receiving` WHERE modeofreceiving_id = '$id'";
     $delete_query_run = mysqli_query($connection, $delete_query);
 
     if($delete_query_run)

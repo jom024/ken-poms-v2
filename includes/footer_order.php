@@ -57,7 +57,7 @@
 
                         $('#order_id').val(value['order_id']);
                         $('#client_id').val(value['client_id']);
-                        $('#modeofreceiving_id').val(value['modeofreceiving_id']);
+                        $('#modeofreceiving-id').val(value['modeofreceiving_id']);
                         $('#order_status').val(value['order_status']);
                         $('#payment_status').val(value['payment_status']);
                         $('#priceID').val(value['total_price']);

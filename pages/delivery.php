@@ -1,3 +1,7 @@
+<?php
+require "code_mor.php";
+?>
+
 <div id="page-content-wrapper">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -45,8 +49,8 @@
                                 <label for="type" class="col-form-label">Type</label>
                                 <select name="type" id="type" class="form-control">
                                     <option value="" selected disabled hidden>Choose here</option>
-                                    <option value="Pending">Pickup</option>
-                                    <option value="Ongoing">Delivery</option>
+                                    <option value="Pickup">Pickup</option>
+                                    <option value="Delivery">Delivery</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -87,7 +91,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="viewMORModalLabel">View Order Details</h1>
+                    <h1 class="modal-title fs-5" id="viewMORModalLabel">View MOR Details</h1>
                 </div>
                 <div class="modal-body">
                     <div class="view-mor-data">
@@ -106,54 +110,54 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editMORLabel">Update Order Details</h1>
+                    <h1 class="modal-title fs-5" id="editMORLabel">Update MOR Details</h1>
                 </div>
-                <form action="code.php" method="POST">
+                <form action="code_mor.php" method="POST">
                     <div class="modal-body">
                         <div class="row mb-3">
-                            <input type="hidden" id="modeofreceiving_id" name="modeofreceiving_id" value="1">
+                            <input type="hidden" id="modeofreceiving_id" name="modeofreceiving_id">
                         </div>
                         <div class="row mb-3">
                             <div class="col-md6"></div>
                             <div class="col-md-2">
-                                <label for="type" class="col-form-label">Type</label>
+                                <label for="type-edit" class="col-form-label">Type</label>
                             </div>
                             <div class="col-md-4">
-                                <select name="type" id="type" class="form-control">
+                                <select name="type_edit" id="type-edit" class="form-control">
                                     <option value="" selected disabled hidden>Choose here</option>
-                                    <option value="Pending">Pickup</option>
-                                    <option value="Ongoing">Delivery</option>
+                                    <option value="Pickup">Pickup</option>
+                                    <option value="Delivery">Delivery</option>
                                 </select>
                             </div>
                             <div class="col-md6"></div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-2">
-                                <label for="delivery_date" class="col-form-label">Delivery Date</label>
+                                <label for="delivery-date" class="col-form-label">Delivery Date</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="date" id="delivery_date" class="form-control" name="delivery_date">
+                                <input type="date" id="delivery-date" class="form-control" name="delivery_date_edit">
                             </div>
                             <div class="col-md-2">
-                                <label for="pickup_date" class="col-form-label">Pickup Date</label>
+                                <label for="pickup-date" class="col-form-label">Pickup Date</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="date" id="pickup_date" class="form-control" name="pickup_date">
+                                <input type="date" id="pickup-date" class="form-control" name="pickup_date_edit">
 
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-2">
-                                <label for="receiver_name" class="col-form-label">Receiver Name</label>
+                                <label for="receiver-name" class="col-form-label">Receiver Name</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="receiver_name" class="form-control" name="receiver_name">
+                                <input type="text" id="receiver-name" class="form-control" name="receiver_name_edit">
                             </div>
                             <div class="col-md-2">
-                                <label for="delivery_address" class="col-form-label">Delivery Address</label>
+                                <label for="delivery-address" class="col-form-label">Delivery Address</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="delivery_address" class="form-control" name="delivery_address">
+                                <input type="text" id="delivery-address" class="form-control" name="delivery_address_edit">
                             </div>
                         </div>
                     </div>
@@ -219,7 +223,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-primary float-start mt-3 mb-3 ordercss" data-bs-toggle="modal" data-bs-target="#addOrder">
+                                    <button type="button" class="btn btn-primary float-start mt-3 mb-3 ordercss" data-bs-toggle="modal" data-bs-target="#addMOR">
                                         <i class="lni lni-plus"></i> ADD</button>
                                 </div>
                             </div>
@@ -261,7 +265,7 @@
                                 if (empty($_GET['sortOrder']) || $_GET['sortOrder'] == 'default') {
                                     @$fetch_query = "SELECT * FROM `mode_of_receiving`";
                                 } else {
-                                    @$fetch_query = "SELECT * FROM `order` ORDER BY $order_by $sort_option";
+                                    @$fetch_query = "SELECT * FROM `mode_of_receiving` ORDER BY $order_by $sort_option";
                                 }
 
                                 $fetch_query_run = mysqli_query($connection, $fetch_query);
@@ -270,7 +274,7 @@
                                     while ($row =  mysqli_fetch_array($fetch_query_run)) {
                                 ?>
                                         <tr>
-                                            <th scope="row" class="modeofreceiving_id"> <?php echo $row['modeofreceiving_id']; ?> </t>
+                                            <th scope="row" class="modeofreceiving-id"> <?php echo $row['modeofreceiving_id']; ?> </t>
                                             <td> <?php echo $row['type']; ?> </td>
                                             <td> <?php echo $row['delivery_date']; ?> </td>
                                             <td> <?php echo $row['pickup_date']; ?> </td>

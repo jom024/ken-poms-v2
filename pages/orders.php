@@ -50,7 +50,7 @@ require "code.php";
                                 <input type="number" id="client-id" class="form-control" min="1" name="client_id">
                             </div>
                             <div class="col-md-3">
-                                <label for="modeofreceiving-id" class="col-form-label">MOR ID</label>
+                                <label for="modeofreceiving_id" class="col-form-label">MOR ID</label>
                                 <input type="number" id="modeofreceiving_id" class="form-control" min="1" name="modeofreceiving_id">
                             </div>
                             <div class="col-md-6">
@@ -138,17 +138,43 @@ require "code.php";
                                 <label for="client_id" class="col-form-label">Client ID</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" id="client_id" class="form-control" name="client_id">
+                                <?php
+                                $connection = mysqli_connect("localhost", "root", "", "ken_poms");
+                                $client_query = "SELECT client_id, contact_name FROM `client`";
+                                $client_query_run = mysqli_query($connection, $client_query);
+
+                                $client_options = '';
+                                if (mysqli_num_rows($client_query_run) > 0) {
+                                    while ($row = mysqli_fetch_assoc($client_query_run)) {
+                                        $client_options .= '<option value="' . $row['client_id'] . '">' . $row['client_id'] .' - ' . $row['contact_name']. '</option>';
+                                    }
+                                } ?>
+                                <select type="number" id="client_id" class="form-control" name="client_id">
+                                    <?php echo $client_options; ?>
+                                </select>
                             </div>
                             <div class="col-md-2">
-                                <label for="client_id" class="col-form-label" >MOR ID</label>
-                            </div>  
+                            <?php
+                                $connection = mysqli_connect("localhost", "root", "", "ken_poms");
+                                $client_query = "SELECT modeofreceiving_id, `type` FROM `mode_of_receiving`";
+                                $client_query_run = mysqli_query($connection, $client_query);
+
+                                $mor_options = '';
+                                if (mysqli_num_rows($client_query_run) > 0) {
+                                    while ($row = mysqli_fetch_assoc($client_query_run)) {
+                                        $mor_options .= '<option value="' . $row['modeofreceiving_id'] . '">' . $row['modeofreceiving_id'] .' - ' . $row['type']. '</option>';
+                                    }
+                                } ?>
+                                <label for="modeofreceiving-id" class="col-form-label">MOR ID</label>
+                            </div>
                             <div class="col-md-4">
-                                <input type="number" id="modeofreceiving_id" class="form-control" name="modeofreceiving_id">
+                                <select type="number" id="modeofreceiving-id" class="form-control" name="modeofreceiving_id">
+                                    <?php echo $mor_options; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-3">
-                        <div class="col-md-2">
+                            <div class="col-md-2">
                                 <label for="order_status" class="col-form-label">Order Status</label>
                             </div>
                             <div class="col-md-4">
@@ -174,7 +200,7 @@ require "code.php";
                             </div>
                         </div>
                         <div class="row mb-3">
-                        <div class="col-md-2">
+                            <div class="col-md-2">
                                 <label for="priceID" class="col-form-label">Total Price</label>
                             </div>
                             <div class="col-md-4">
@@ -230,8 +256,8 @@ require "code.php";
                                     <div class="input-group mt-3 mb-3">
                                         <select name="sortOrder" class="form-control">
                                             <option value="default" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "default") {
-                                                                                    echo 'default';
-                                                                                } ?>>Default</option>
+                                                                        echo 'default';
+                                                                    } ?>>Default</option>
                                             <option value="most-recent-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "most-recent-first") {
                                                                                     echo 'selected';
                                                                                 } ?>>Most Recent</option>
@@ -239,17 +265,17 @@ require "code.php";
                                                                                 echo 'selected';
                                                                             } ?>>Oldest</option>
                                             <option value="highest-price-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "highest-price-first") {
-                                                                                echo 'selected';
-                                                                            } ?>>Highest Price</option>
+                                                                                    echo 'selected';
+                                                                                } ?>>Highest Price</option>
                                             <option value="lowest-price-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "lowest-price-first") {
-                                                                                echo 'selected';
-                                                                            } ?>>Lowest Price</option>
+                                                                                    echo 'selected';
+                                                                                } ?>>Lowest Price</option>
                                             <!-- <option value="nearest-due" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "nearest-due") {
-                                                                                echo 'selected';
-                                                                            } ?>>Lowest Price</option>
+                                                                                    echo 'selected';
+                                                                                } ?>>Lowest Price</option>
                                             <option value="lowest-price-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "lowest-price-first") {
-                                                                                echo 'selected';
-                                                                            } ?>>Lowest Price</option> -->
+                                                                                    echo 'selected';
+                                                                                } ?>>Lowest Price</option> -->
                                         </select>
                                         <button class="input-group-text btn-filter" type="submit" id="basic-addon2"><i class="fa fa-filter" aria-hidden="true"></i>
                                         </button>
@@ -281,23 +307,23 @@ require "code.php";
                                 <?php
 
                                 $connection = mysqli_connect("localhost", "root", "", "ken_poms");
-                                if(isset($_GET['sortOrder'])){
-                                    if($_GET['sortOrder'] == 'most-recent-first'){
+                                if (isset($_GET['sortOrder'])) {
+                                    if ($_GET['sortOrder'] == 'most-recent-first') {
                                         $sort_option = 'DESC';
                                         $order_by = 'order_date';
-                                    } else if($_GET['sortOrder'] == 'oldest-first'){
+                                    } else if ($_GET['sortOrder'] == 'oldest-first') {
                                         $sort_option = 'ASC';
                                         $order_by = 'order_date';
-                                    } else if($_GET['sortOrder'] == 'highest-price-first'){
+                                    } else if ($_GET['sortOrder'] == 'highest-price-first') {
                                         $sort_option = 'DESC';
                                         $order_by = 'total_price';
-                                    } else if($_GET['sortOrder'] == 'lowest-price-first'){
+                                    } else if ($_GET['sortOrder'] == 'lowest-price-first') {
                                         $sort_option = 'ASC';
                                         $order_by = 'total_price';
                                     }
                                 }
-                                
-                                if(empty($_GET['sortOrder']) || $_GET['sortOrder'] == 'default'){
+
+                                if (empty($_GET['sortOrder']) || $_GET['sortOrder'] == 'default') {
                                     @$fetch_query = "SELECT * FROM `order`";
                                 } else {
                                     @$fetch_query = "SELECT * FROM `order` ORDER BY $order_by $sort_option";

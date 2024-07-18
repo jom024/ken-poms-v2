@@ -24,7 +24,6 @@ if (isset($_POST['save'])) {
     }
 }
 
-
 // View
 if (isset($_POST['click-view-client-btn'])) {
     $id = $_POST['client-id'];
@@ -82,10 +81,11 @@ if (isset($_POST['click-view-client-btn'])) {
 
 // Edit
 if (isset($_POST['click-edit-client-btn'])) {
-    $id = $_POST['client_id'];
+    $id = $_POST['client-id'];
+    
     $array_result = [];
 
-    $fetch_query = "SELECT * FROM `client` WHERE client_id='$id'";
+    $fetch_query = "SELECT * FROM `client` WHERE client_id = '$id'";
     $fetch_query_run = mysqli_query($connection, $fetch_query);
 
     if (mysqli_num_rows($fetch_query_run) > 0) {
@@ -101,30 +101,43 @@ if (isset($_POST['click-edit-client-btn'])) {
 }
 
 // Update
-if (isset($_POST['update']))
-{
-    $id = $_POST['client_id'];
-    $company_name = $_POST['company_name'];
-    $contact_name = $_POST['contact_name'];
-    $contact_title = $_POST['contact_title'];
-    $city = $_POST['city'];
-    $province = $_POST['province'];
-    $postal_code = $_POST['postal_code'];
-    $province = $_POST['province'];
-    $contact_number = $_POST['contact_number'];
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
 
-    $update_query = "UPDATE `client` SET company_name = '$company_name', contact_name ='$contact_name' , contact_title='$contact_title' , city='$city' , postal_code='$postal_code', province='$province', contact_number='$contact_number' WHERE client_id = '$id'";
+    // Validate and sanitize input data
+    $company_name = $_POST['company_name_edit'];
 
-    $update_query_run = mysqli_query($connection, $update_query);
+    $contact_name = $_POST['contact_name_edit'];
+    $contact_title = $_POST['contact_title_edit'];
+    $city = $_POST['city_edit'];
+    $postal_code = $_POST['postal_code_edit'];
+    $province = $_POST['province_edit'];
+    $contact_number = $_POST['contact_number_edit'];
 
-    if($update_query_run){
+    // Update query
+    $update_query = "UPDATE `client` SET 
+                        company_name = '$company_name', 
+                        contact_name = '$contact_name', 
+                        contact_title = '$contact_title', 
+                        city = '$city', 
+                        postal_code = '$postal_code', 
+                        province = '$province', 
+                        contact_number = '$contact_number' 
+                     WHERE client_id = '$id'";
+
+    // Run the query and check for errors
+    if (mysqli_query($connection, $update_query)) {
         $_SESSION['status'] = "Data updated successfully";
         header("Location: index.php?page=customers");
     } else {
-        $_SESSION['status'] = "Update failed";
+        $_SESSION['status'] = "Update failed: " . mysqli_error($connection);
         header("Location: index.php?page=customers");
     }
+
 }
+
+
+
 
 // delete
 if(isset($_POST['click_delete_btn']))
@@ -142,4 +155,7 @@ if(isset($_POST['click_delete_btn']))
         echo "Order deletion failed.";
     }
 }
+
+
 ?>
+

@@ -13,8 +13,8 @@
 
             // console.log('hello');
 
-            var modeofreceiving_id = $(this).closest('tr').find('.modeofreceiving_id').text();
-
+            var modeofreceiving_id = $(this).closest('tr').find('.modeofreceiving-id').text();
+            console.log(modeofreceiving_id);
             $.ajax({
                 type: "POST",
                 url: "code_mor.php",
@@ -32,22 +32,21 @@
         });
     });
 
-    // edit-order
+    // edit-MOR
     $(document).ready(function() {
 
-        $('.edit-order').click(function(e) {
+        $('.edit-mor').click(function(e) {
             e.preventDefault();
 
 
-            var order_id = $(this).closest('tr').find('.order-id').text();
-            console.log(order_id);
-
+            var modeofreceiving_id = $(this).closest('tr').find('.modeofreceiving-id').text();
+            // console.log(modeofreceiving_id);
             $.ajax({
                 type: "POST",
                 url: "code_mor.php",
                 data: {
-                    'click-edit-btn': true,
-                    'order-id': order_id,
+                    'click-edit-mor-btn': true,
+                    'modeofreceiving-id': modeofreceiving_id,
                 },
                 success: function(response) {
                     // console.log(response);
@@ -55,13 +54,12 @@
                     $.each(response, function(Key, value) {
                         // console.log(value['client_id']);
 
-                        $('#order_id').val(value['order_id']);
-                        $('#client_id').val(value['client_id']);
-                        $('#order_status').val(value['order_status']);
-                        $('#payment_status').val(value['payment_status']);
-                        $('#priceID').val(value['total_price']);
-                        $('#order_date').val(value['order_date']);
-                        $('#fulfillment_date').val(value['fulfillment_date']);
+                        $('#modeofreceiving_id').val(value['modeofreceiving_id']);
+                        $('#type-edit').val(value['type']);
+                        $('#delivery-date').val(value['delivery_date']);
+                        $('#pickup-date').val(value['pickup_date']);
+                        $('#receiver-name').val(value['receiver_name']);
+                        $('#delivery-address').val(value['delivery_address']);
                     });
                     // $('#editOrder').modal('show');
                 }
@@ -74,7 +72,7 @@
         $('.delete_btn').click(function(e) {
             e.preventDefault();
 
-            var order_id = $(this).closest('tr').find('.order-id').text();
+            var modeofreceiving_id = $(this).closest('tr').find('.modeofreceiving-id').text();
             // console.log(order_id);
 
             $.ajax({
@@ -82,7 +80,7 @@
                 url: "code_mor.php",
                 data: {
                     'click_delete_btn': true,
-                    'order-id': order_id,
+                    'modeofreceiving-id': modeofreceiving_id,
                 },
                 success: function(response) {
                     console.log(response);

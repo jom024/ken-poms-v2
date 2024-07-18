@@ -16,7 +16,7 @@
     }
 
     // If a page is set in the URL, use it
-    if (isset($_GET['page']) && in_array($_GET['page'], ['dashboard', 'customers', 'orders', 'printing-jobs', 'settings', 'profile'])) {
+    if (isset($_GET['page']) && in_array($_GET['page'], ['dashboard', 'customers', 'orders', 'printing-jobs', 'settings', 'profile', 'delivery'])) {
         @$page = $_GET['page'];
     }
 
@@ -50,16 +50,20 @@
         <!-- /#sidebar-wrapper -->
         <?php
 
+        if (@$page == 'dashboard' 
+        || empty(@$page) && empty(@$GET['sortOrder'] )|| empty(@$page) && empty(@$GET['sortClient'] )) {
+            include("pages/dashboard.php");
+        } else
         if (
             @$page == 'orders' || @$_GET['sortOrder'] == 'most-recent-first'
             || @$_GET['sortOrder'] == 'oldest-first' || @$_GET['sortOrder'] == 'default'
             || @$_GET['sortOrder'] == 'highest-price-first' || @$_GET['sortOrder'] == 'lowest-price-first'
         ) {
             include("pages/orders.php");
-        } else if (@$page == 'dashboard' || (empty(@$page) && empty(@$GET['sortOrder']))) {
-            include("pages/dashboard.php");
-        } else if (@$page == 'customers') {
-
+        } else if (
+            @$page == 'customers' || @$_GET['sortClient'] == 'a-z'
+            || @$_GET['sortClient'] == 'z-a'
+        ) {
             include("pages/customers.php");
         } else if (@$page == 'delivery') {
             include("pages/delivery.php");
@@ -77,16 +81,29 @@
         <!-- /#page-content-wrapper -->
     </div>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <?php
+    if (
+        @$page == 'orders' || @$_GET['sortOrder'] == 'most-recent-first'
+        || @$_GET['sortOrder'] == 'oldest-first' || @$_GET['sortOrder'] == 'default'
+        || @$_GET['sortOrder'] == 'highest-price-first' || @$_GET['sortOrder'] == 'lowest-price-first'
+    ) {
         include("includes/footer_order.php");
+    } else if (
+        @$page == 'customers' || @$_GET['sortClient'] == 'a-z'
+        || @$_GET['sortClient'] == 'z-a'
+    ) {
         include("includes/footer_client.php");
+    } else if (@$page == 'delivery') {
         include("includes/footer_mor.php");
+    } else if (@$page == 'printing-jobs') {
+        include("includes/footer_pj.php");
+    }
 
     ?>
-    
+
 </body>
 
 </html>

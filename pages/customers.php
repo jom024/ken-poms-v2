@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 require "code_client.php";
 ?>
 
@@ -121,56 +121,56 @@ require "code_client.php";
                 <form action="code_client.php" method="POST">
                     <div class="modal-body">
                         <div class="row mb-3">
-                            <input type="hidden" id="client_id" name="client_id">
+                            <input type="hidden" id="client_id" name="id" value='<?php echo $client_id; ?>'>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-2">
-                                <label for="company_name" class="col-form-label">Company Name</label>
+                                <label for="company-name" class="col-form-label">Company Name</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="company_name" class="form-control" name="company_name">
+                                <input type="text" id="company-name" class="form-control" name="company_name_edit">
                             </div>
                             <div class="col-md-2">
-                                <label for="contact_name" class="col-form-label">Contact Name</label>
+                                <label for="contact-name" class="col-form-label">Contact Name</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="contact_name" class="form-control" name="contact_name">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-2">
-                                <label for="contact_title" class="col-form-label">Contact Title</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="contact_title" class="form-control" name="contact_title">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="city" class="col-form-label">City</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="city" class="form-control" name="city">
+                                <input type="text" id="contact-name" class="form-control" name="contact_name_edit">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-2">
-                                <label for="postal_code" class="col-form-label">Postal Code</label>
+                                <label for="contact-title" class="col-form-label">Contact Title</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="postal_code" class="form-control" name="postal_code">
+                                <input type="text" id="contact-title" class="form-control" name="contact_title_edit">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="city-edit" class="col-form-label">City</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="city-edit" class="form-control" name="city_edit">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <label for="postal-code" class="col-form-label">Postal Code</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="postal-code" class="form-control" name="postal_code_edit">
                             </div>
                             <div class="col-md-2">
                                 <label for="province" class="col-form-label">Province</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="province" class="form-control" name="province">
+                                <input type="text" id="province-edit" class="form-control" name="province_edit">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-2">
-                                <label for="contact_number" class="col-form-label">Contact No.</label>
+                                <label for="contact-number" class="col-form-label">Contact No.</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="contact_number" class="form-control" name="contact_number">
+                                <input type="text" id="contact-number" class="form-control" name="contact_number_edit">
                             </div>
                         </div>
                     </div>
@@ -208,28 +208,16 @@ require "code_client.php";
                                 </div>
                                 <div class="col-md-4 float-end">
                                     <div class="input-group mt-3 mb-3">
-                                        <select name="sortOrder" class="form-control">
-                                            <option value="default" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "default") {
+                                        <select name="sortClient" class="form-control">
+                                            <option value="default" <?php if (isset($_GET['sortClient']) && $_GET['sortClient'] == "default") {
                                                                         echo 'default';
                                                                     } ?>>Default</option>
-                                            <option value="most-recent-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "most-recent-first") {
+                                            <option value="a-z" <?php if (isset($_GET['sortClient']) && $_GET['sortClient'] == "a-z") {
                                                                                     echo 'selected';
-                                                                                } ?>>Most Recent</option>
-                                            <option value="oldest-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "oldest-first") {
+                                                                                } ?>>Alphabetical Order (A-Z)</option>
+                                            <option value="z-a" <?php if (isset($_GET['sortClient']) && $_GET['sortClient'] == "z-a") {
                                                                                 echo 'selected';
-                                                                            } ?>>Oldest</option>
-                                            <option value="highest-price-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "highest-price-first") {
-                                                                                    echo 'selected';
-                                                                                } ?>>Highest Price</option>
-                                            <option value="lowest-price-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "lowest-price-first") {
-                                                                                    echo 'selected';
-                                                                                } ?>>Lowest Price</option>
-                                            <!-- <option value="nearest-due" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "nearest-due") {
-                                                                                    echo 'selected';
-                                                                                } ?>>Lowest Price</option>
-                                            <option value="lowest-price-first" <?php if (isset($_GET['sortOrder']) && $_GET['sortOrder'] == "lowest-price-first") {
-                                                                                    echo 'selected';
-                                                                                } ?>>Lowest Price</option> -->
+                                                                            } ?>>Alphabetical Order (Z-A)</option>
                                         </select>
                                         <button class="input-group-text btn-filter" type="submit" id="basic-addon2"><i class="fa fa-filter" aria-hidden="true"></i>
                                         </button>
@@ -261,23 +249,17 @@ require "code_client.php";
                                 <?php
 
                                 $connection = mysqli_connect("localhost", "root", "", "ken_poms");
-                                if (isset($_GET['sortOrder'])) {
-                                    if ($_GET['sortOrder'] == 'most-recent-first') {
-                                        $sort_option = 'DESC';
-                                        $order_by = 'order_date';
-                                    } else if ($_GET['sortOrder'] == 'oldest-first') {
+                                if (isset($_GET['sortClient'])) {
+                                    if ($_GET['sortClient'] == 'a-z') {
                                         $sort_option = 'ASC';
-                                        $order_by = 'order_date';
-                                    } else if ($_GET['sortOrder'] == 'highest-price-first') {
+                                        $order_by = 'contact_name';
+                                    } else if ($_GET['sortClient'] == 'z-a') {
                                         $sort_option = 'DESC';
-                                        $order_by = 'total_price';
-                                    } else if ($_GET['sortOrder'] == 'lowest-price-first') {
-                                        $sort_option = 'ASC';
-                                        $order_by = 'total_price';
-                                    }
+                                        $order_by = 'contact_name';
+                                    }   
                                 }
 
-                                if (empty($_GET['sortOrder']) || $_GET['sortOrder'] == 'default') {
+                                if (empty($_GET['sortClient']) || $_GET['sortClient'] == 'default') {
                                     @$fetch_query = "SELECT * FROM `client`";
                                 } else {
                                     @$fetch_query = "SELECT * FROM `client` ORDER BY $order_by $sort_option";
