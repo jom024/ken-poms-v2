@@ -38,11 +38,12 @@
             <div class="list-group list-group-flush my-3">
                 <a href="?page=dashboard" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php echo (@$page == 'dashboard') ? 'active' : ''; ?>"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                 <a href="?page=customers" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php echo (@$page == 'customers') ? 'active' : ''; ?>"><i class="fas fa-project-diagram me-2"></i>Customers</a>
+                <a href="?page=delivery" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php echo (@$page == 'delivery') ? 'active' : ''; ?>"><i class="fas fa-truck me-2"></i>Mode of Receiving</a>
                 <a href="?page=orders" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php echo (@$page == 'orders') ? 'active' : ''; ?>"><i class="fas fa-chart-line me-2"></i>Orders</a>
                 <a href="?page=printing-jobs" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php echo (@$page == 'printing-jobs') ? 'active' : ''; ?>"><i class="fas fa-paperclip me-2"></i>Printing Jobs</a>
-                <a href="?page=delivery" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php echo (@$page == 'delivery') ? 'active' : ''; ?>"><i class="fas fa-truck me-2"></i>Mode of Receiving</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-gift me-2"></i>Quotations</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-comment-dots me-2"></i>Particulars</a>
+                <a href="?page=payment" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php echo (@$page == 'payment') ? 'active' : ''; ?>"><i class="fas fa-coins me-2"></i>Payment</a>
+                <a href="?page=quotations" class="list-group-item list-group-item-action bg-transparent second-text fw-bold  <?php echo (@$page == 'quotations') ? 'active' : ''; ?>"><i class="far fa-clipboard me-2" ></i>Quotations</a>
+                <a href="?page=particulars" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php echo (@$page == 'particulars') ? 'active' : ''; ?>"><i class="fas fa-comment-dots me-2"></i>Particulars</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-map-marker-alt me-2"></i>Employees</a>
                 <a href="login.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Logout</a>
             </div>
@@ -73,6 +74,8 @@
             include("pages/printing-jobs.php");
         } else if (@$page == 'settings') {
             include("pages/settings.php");
+        } else if (@$page == 'quotations') {
+            include("pages/quotations.php");
         }
 
         ?>
@@ -100,6 +103,8 @@
         include("includes/footer_mor.php");
     } else if (@$page == 'printing-jobs') {
         include("includes/footer_pj.php");
+    } else if (@$page == 'quotations') {
+        include("includes/footer_quo.php");
     }
 
     ?>
